@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue 3 Form with Vuetify (ES6)</title>
+
+        <!-- Import Vue 3 -->
+        <script src="//unpkg.com/vue@3"></script>
+
+        <!-- Import style -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/vuetify@3.7.4/dist/vuetify.min.css">
+        <!-- Import component library -->
+        <script src="//cdn.jsdelivr.net/npm/vuetify@3.7.4/dist/vuetify.min.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <h1>Enhanced Form</h1>
+
+            <v-form label-width="auto" style="max-width: 600px" @submit.prevent="submitForm">
+                <!-- Text Input -->
+                <v-text-field label="Name" v-model="formData.name"></v-text-field>
+
+                <!-- Date Picker -->
+                <v-date-picker label="Select Date" width="400" v-model="formData.date"></v-date-picker>
+
+                <!-- Radio Buttons -->
+                <v-radio-group label="Resources" v-model="formData.gender">
+                    <v-radio label="Male" value="Male"></v-radio>
+                    <v-radio label="Female" value="Female"></v-radio>
+                </v-radio-group>
+
+                <!-- Slider -->
+                <v-slider label="Age" v-model="formData.age"></v-slider>
+                <div>Age: {{ formData.age }}</div>
+
+                <!-- Switch -->
+                <v-switch label="Agree to terms" v-model="formData.agree"></v-switch>
+
+                <!-- Dropdown -->
+                <v-select label="Select an option" v-model="formData.option" placeholder="please select your option"
+                    :items="items">
+                </v-select>
+
+                <!-- Language Switcher -->
+                <select v-model="locale" @change="changeLocale">
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                </select>
+
+                <h2>{{ $t('welcome') }}</h2>
+
+                <!-- Submit Button -->
+                <v-btn type="primary">
+                    {{ $t('submit') }}
+                </v-btn>
+            </v-form>
+
+            <!-- Output the Form Data -->
+            <div>
+                <pre>{{ formData }}</pre>
+            </div>
+
+            <!-- Table for Remote Data -->
+            <div>
+                <h2>Remote Data</h2>
+                <v-data-table :headers="headers" :items="users" stripe></v-data-table>
+            </div>
+
+        </div>
+
+        <!-- Import Vue I18n -->
+        <script src="https://unpkg.com/vue-i18n@9"></script>
+        <!-- Import JavaScript file as ES6 module -->
+        <script type="module" src="app.js"></script>
+    </body>
+
+</html>
